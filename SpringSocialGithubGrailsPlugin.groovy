@@ -11,8 +11,8 @@ class SpringSocialGithubGrailsPlugin {
     ]
 
     // TODO Fill in these fields
-    def author = "Your name"
-    def authorEmail = ""
+    def author = "Domingo Suarez Torres, Jose Juan Reyes Zuniga"
+    def authorEmail = "domingo.suarez@gmail.com"
     def title = "Plugin summary/headline"
     def description = '''\\
 Brief description of the plugin.
