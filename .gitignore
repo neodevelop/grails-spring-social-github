@@ -17,3 +17,6 @@ web-app/css/main.css
 web-app/images/
 web-app/js/prototype/
 web-app/js/application.js
+
+grails-spring-social-github.ipr
+grails-spring-social-github.iws
