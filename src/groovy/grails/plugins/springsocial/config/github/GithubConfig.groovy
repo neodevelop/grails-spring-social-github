@@ -12,8 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package grails.plugins.springsocial.config.github
+package grails.plugins.springsocial.config.twitter
 
+import grails.plugins.springsocial.twitter.SpringSocialGitHubUtils
 import javax.inject.Inject
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -25,28 +26,28 @@ import org.springframework.social.connect.support.ConnectionFactoryRegistry
 import org.springframework.social.github.api.GitHub
 import org.springframework.social.github.api.impl.GitHubTemplate
 import org.springframework.social.github.connect.GitHubConnectionFactory
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 @Configuration
-class GithubConfig {
-  @Inject
-  ConnectionFactoryLocator connectionFactoryLocator
-  @Inject
-  ConnectionRepository connectionRepository
+class GitHubConfig {
+    @Inject
+    ConnectionFactoryLocator connectionFactoryLocator
+    @Inject
+    ConnectionRepository connectionRepository
 
-  @Bean
-  String fooGithub() {
-    println "Configuring SpringSocial Github"
-    def clientId = ConfigurationHolder.config.github.clientId
-    def clientSecret = ConfigurationHolder.config.github.clientSecret
-    ((ConnectionFactoryRegistry) connectionFactoryLocator).addConnectionFactory(new GitHubConnectionFactory(clientId, clientSecret))
-    "github"
-  }
+    @Bean
+    String fooGitHub() {
+        println "Configuring SpringSocial GitHub"
+        def gitHubConfig = SpringSocialGitHubUtils.config.github
+        def consumerKey = gitHubConfig.consumerKey
+        def consumerSecret = gitHubConfig.consumerSecret
+        ((ConnectionFactoryRegistry) connectionFactoryLocator).addConnectionFactory(new GitHubConnectionFactory(consumerKey, consumerSecret))
+        "github"
+    }
 
-  @Bean
-  @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
-  public GitHub twitter() {
-    def github = connectionRepository.findPrimaryConnection(GitHub)
-    github != null ? github.getApi() : new GitHubTemplate()
-  }
+    @Bean
+    @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
+    public GitHub gitHub() {
+        def gitHub = connectionRepository.findPrimaryConnection(GitHub)
+        gitHub != null ? gitHub.getApi() : new GitHubTemplate()
+    }
 }
