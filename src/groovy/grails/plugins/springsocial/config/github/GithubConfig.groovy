@@ -14,7 +14,7 @@
  */
 package grails.plugins.springsocial.config.twitter
 
-import grails.plugins.springsocial.twitter.SpringSocialGitHubUtils
+import grails.plugins.springsocial.github.SpringSocialGitHubUtils
 import javax.inject.Inject
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

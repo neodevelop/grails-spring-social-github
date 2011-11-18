@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package grails.plugins.springsocial.twitter;
+package grails.plugins.springsocial.github;
 
-import grails.plugins.springsocial.config.GithubReflectionUtils;
+import grails.plugins.springsocial.config.GitHubReflectionUtils;
 import grails.util.Environment;
 import groovy.lang.GroovyClassLoader;
 import groovy.util.ConfigObject;
@@ -29,7 +29,7 @@ public final class SpringSocialGitHubUtils {
 
     private static ConfigObject config;
 
-    private SpringSocialGithubUtils() {
+    private SpringSocialGitHubUtils() {
         // static only
     }
 
@@ -66,7 +66,7 @@ public final class SpringSocialGitHubUtils {
      * Force a reload of the springsocial configuration.
      */
     public static void reloadConfig() {
-        mergeConfig(GithubReflectionUtils.getConfig(), "DefaultSpringSocialGithubConfig");
+        mergeConfig(GitHubReflectionUtils.getConfig(), "DefaultSpringSocialGithubConfig");
     }
 
 
@@ -77,7 +77,7 @@ public final class SpringSocialGitHubUtils {
      * @param className     the name of the config class to load
      */
     private static void mergeConfig(final ConfigObject currentConfig, final String className) {
-        GroovyClassLoader classLoader = new GroovyClassLoader(GithubReflectionUtils.class.getClassLoader());
+        GroovyClassLoader classLoader = new GroovyClassLoader(GitHubReflectionUtils.class.getClassLoader());
         ConfigSlurper slurper = new ConfigSlurper(Environment.getCurrent().getName());
         ConfigObject secondaryConfig;
         try {
@@ -88,7 +88,7 @@ public final class SpringSocialGitHubUtils {
         }
 
         config = mergeConfig(currentConfig, (ConfigObject) secondaryConfig.getProperty("springsocial"));
-        GithubReflectionUtils.setConfig(config);
+        GitHubReflectionUtils.setConfig(config);
     }
 
     /**
